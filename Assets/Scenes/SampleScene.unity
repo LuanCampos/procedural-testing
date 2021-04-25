@@ -652,7 +652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  mouseSensitivity: 2
+  jumpHeight: 5
+  mouseSensitivity: 1.5
   mouseSmoothing: 8
   minAngleY: -90
   maxAngleY: 90

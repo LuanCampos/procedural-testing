@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 	[Header("[Movement Speed]")]
 	[SerializeField] private float moveSpeed = 5f;
+	[SerializeField] private float jumpHeight = 5f;
 	
 	[Header("[Mouse and Camera Control]")]
 	[SerializeField] private float mouseSensitivity = 2f;
@@ -15,7 +16,9 @@ public class PlayerController : MonoBehaviour
 	
 	private float verticalInput;
 	private float horizontalInput;
+	private bool willJump;
 	private Vector3 zeroY = new Vector3(1, 0, 1);
+	private Vector3 justY = new Vector3(0, 1, 0);
 	private Transform mainCamera;
 	private Rigidbody rb;
 	
@@ -47,6 +50,18 @@ public class PlayerController : MonoBehaviour
 		
 		mouseX = Input.GetAxis("Mouse X");
 		mouseY = Input.GetAxis("Mouse Y");
+		
+		if (Input.GetKeyDown("space"))
+        {
+			RaycastHit hit;
+			
+			Debug.DrawRay(transform.position, -Vector3.up * 0.6f, Color.green, 2f);
+			
+			if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.6f))
+			{
+				willJump = true;
+			}
+        }
 	}
 	
 	private void MoveCamera()
@@ -66,7 +81,14 @@ public class PlayerController : MonoBehaviour
 	{
 		Vector3 verticalVector = Vector3.Scale(mainCamera.forward, zeroY) * verticalInput;
 		Vector3 horizontalVector = Vector3.Scale(mainCamera.right, zeroY) * horizontalInput;
+		float yVelocity = rb.velocity.y;
 		
-		rb.velocity = ((verticalVector + horizontalVector).normalized * moveSpeed);
+		if (willJump)
+		{
+			yVelocity += jumpHeight;
+			willJump = false;
+		}
+		
+		rb.velocity = ((verticalVector + horizontalVector).normalized * moveSpeed) + justY * yVelocity;
 	}
 }
