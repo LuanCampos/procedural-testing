@@ -652,8 +652,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
-  jumpForce: 300
   maxSpeed: 3
+  jumpForce: 6
+  jumpInputCount: 10
   mouseSensitivity: 2
   mouseSmoothing: 8
   minAngleY: -90

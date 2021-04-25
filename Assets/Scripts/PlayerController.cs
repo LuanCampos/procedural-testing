@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	[Header("[Movement Speed]")]
-	[SerializeField] private float moveSpeed = 5f;
-	[SerializeField] private float jumpForce = 5f;
-	[SerializeField] private float maxSpeed = 5f;
+	[SerializeField] private float moveSpeed = 20f;
+	[SerializeField] private float maxSpeed = 3f;
+	[SerializeField] private float jumpForce = 6f;
+	[SerializeField] private int jumpInputCount = 10;
 	
 	[Header("[Mouse and Camera Control]")]
 	[SerializeField] private float mouseSensitivity = 2f;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
 	
 	private float verticalInput;
 	private float horizontalInput;
-	private bool willJump;
+	private int willJump;
 	private Vector3 zeroY = new Vector3(1, 0, 1);
 	private Transform mainCamera;
 	private Rigidbody rb;
@@ -54,12 +55,7 @@ public class PlayerController : MonoBehaviour
 		
 		if (Input.GetKeyDown("space"))
         {
-			RaycastHit hit;
-			
-			if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.6f))
-			{
-				willJump = true;
-			}
+			willJump = jumpInputCount;
         }
 	}
 	
@@ -97,10 +93,20 @@ public class PlayerController : MonoBehaviour
 			rb.velocity = new Vector3(0, rb.velocity.y, 0);
 		}
 		
-		if (willJump)
-		{
-			rb.AddForce(Vector3.up * jumpForce);
-			willJump = false;
-		}
+		if (willJump > 0)
+        {
+			RaycastHit hit;
+			
+			if (Physics.SphereCast(transform.position, 0.4f, -Vector3.up, out hit, 0.15f))
+			{
+				rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+				willJump = 0;
+			}
+			
+			else
+			{
+				willJump --;
+			}
+        }
 	}
 }
