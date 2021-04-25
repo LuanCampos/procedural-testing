@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	[Header("[Movement Speed]")]
-	[SerializeField] private float moveSpeed = 12f;
+	[SerializeField] private float moveSpeed = 5f;
 	
 	[Header("[Mouse and Camera Control]")]
-	[SerializeField] private float mouseSensitivity = 1.0f;
-	[SerializeField] private float mouseSmoothing = 1.0f;
+	[SerializeField] private float mouseSensitivity = 2f;
+	[SerializeField] private float mouseSmoothing = 8f;
 	[SerializeField] private float minAngleY = -90f;
 	[SerializeField] private float maxAngleY = 90f;
 	
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 		mainCamera = Camera.main.transform;
+		Cursor.visible = false;
     }
 
     void Update()
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
 		float mouseMovementX = mouseX * mouseSensitivity * mouseSmoothing;
 		float mouseMovementY = mouseY * mouseSensitivity * mouseSmoothing;
 		
-		smoothV = new Vector2(Mathf.Lerp(smoothV.x, mouseMovementX, 100f / mouseSmoothing * Time.deltaTime), Mathf.Lerp(smoothV.y, mouseMovementY, 100f / mouseSmoothing * Time.deltaTime));
+		smoothV = new Vector2(Mathf.Lerp(smoothV.x, mouseMovementX, mouseSmoothing * Time.deltaTime), Mathf.Lerp(smoothV.y, mouseMovementY, mouseSmoothing * Time.deltaTime));
         mouseLook += smoothV;
         mouseLook.y = Mathf.Clamp(mouseLook.y, minAngleY, maxAngleY);
 
