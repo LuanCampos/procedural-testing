@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 	[Header("[Movement Speed]")]
 	[SerializeField] private float moveSpeed = 5f;
-	[SerializeField] private float jumpHeight = 5f;
+	[SerializeField] private float jumpForce = 5f;
+	[SerializeField] private float maxSpeed = 5f;
 	
 	[Header("[Mouse and Camera Control]")]
 	[SerializeField] private float mouseSensitivity = 2f;
@@ -18,7 +19,6 @@ public class PlayerController : MonoBehaviour
 	private float horizontalInput;
 	private bool willJump;
 	private Vector3 zeroY = new Vector3(1, 0, 1);
-	private Vector3 justY = new Vector3(0, 1, 0);
 	private Transform mainCamera;
 	private Rigidbody rb;
 	
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 		mainCamera = Camera.main.transform;
+		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
     }
 
@@ -55,8 +56,6 @@ public class PlayerController : MonoBehaviour
         {
 			RaycastHit hit;
 			
-			Debug.DrawRay(transform.position, -Vector3.up * 0.6f, Color.green, 2f);
-			
 			if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.6f))
 			{
 				willJump = true;
@@ -81,14 +80,27 @@ public class PlayerController : MonoBehaviour
 	{
 		Vector3 verticalVector = Vector3.Scale(mainCamera.forward, zeroY) * verticalInput;
 		Vector3 horizontalVector = Vector3.Scale(mainCamera.right, zeroY) * horizontalInput;
-		float yVelocity = rb.velocity.y;
+		
+		rb.AddForce((verticalVector + horizontalVector).normalized * moveSpeed);
+		
+		if (verticalInput != 0 || horizontalInput != 0)
+		{
+			if (Vector3.Scale(rb.velocity, zeroY).sqrMagnitude > maxSpeed)
+			{
+				Vector3 clampSpeed = Vector3.Scale(rb.velocity, zeroY).normalized * maxSpeed;
+				rb.velocity = new Vector3(clampSpeed.x, rb.velocity.y, clampSpeed.z);
+			}
+		}
+		
+		else
+		{
+			rb.velocity = new Vector3(0, rb.velocity.y, 0);
+		}
 		
 		if (willJump)
 		{
-			yVelocity += jumpHeight;
+			rb.AddForce(Vector3.up * jumpForce);
 			willJump = false;
 		}
-		
-		rb.velocity = ((verticalVector + horizontalVector).normalized * moveSpeed) + justY * yVelocity;
 	}
 }
