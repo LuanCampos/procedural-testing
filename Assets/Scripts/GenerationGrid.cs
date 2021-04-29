@@ -16,7 +16,7 @@ public class GenerationGrid : MonoBehaviour
 		{
 			for (int column = 0; column < gridSize.y; column ++)
 			{
-				Vector3 position = new Vector3(line * spaceBetween + Random.Range(-spaceVariation, spaceVariation), -1f, column * spaceBetween + Random.Range(-spaceVariation, spaceVariation));
+				Vector3 position = new Vector3(line * spaceBetween + Random.Range(-spaceVariation, spaceVariation), -0.5f, column * spaceBetween + Random.Range(-spaceVariation, spaceVariation));
 				Instantiate(prefabs[Random.Range(0, prefabs.Length)], position, Quaternion.Euler(0, Random.Range(-180, 180), 0));
 			}
 		}

@@ -246,18 +246,15 @@ MonoBehaviour:
   spaceBetween: 5
   spaceVariation: 2
   prefabs:
-  - {fileID: 187236, guid: a94d614f979e04e48a3c1291a989b4bc, type: 3}
-  - {fileID: 194154, guid: 327d8353ad979b041b7427cbb6977c93, type: 3}
-  - {fileID: 1380395610871076, guid: 2feb279d5cd836848941f6f7340ac552, type: 3}
-  - {fileID: 104992, guid: 54de75368529c3941abc061082a1f9d2, type: 3}
-  - {fileID: 176248, guid: 0256878ad343319489251dbd127fa5b6, type: 3}
-  - {fileID: 1000012064314126, guid: 0df5765acbf5842f38119a21a68f5eec, type: 3}
+  - {fileID: 1000014109055006, guid: 5c9de7283eb7304419a30532403d04e6, type: 3}
+  - {fileID: 142528, guid: 6affd7a4d2817d34c86de238de109f8f, type: 3}
+  - {fileID: 159194, guid: e0892e1ea1bfc4341b9ebc259a36a0c6, type: 3}
+  - {fileID: 1000011714656038, guid: 126cd587c28004e4285dc7f5c3939a03, type: 3}
+  - {fileID: 115064, guid: e249c30ff85e94249b2d74951bcbde63, type: 3}
+  - {fileID: 124660, guid: 3be346d3e2145b046a53b836c10f1bae, type: 3}
   - {fileID: 132534, guid: 35d4951e636d2ad429be57c270484724, type: 3}
-  - {fileID: 1000011195224520, guid: 364b2560ed6bc4bc38dfe1a9e565fcae, type: 3}
-  - {fileID: 1000013691819444, guid: 23fb3c27667a24fa384d6150e734a903, type: 3}
-  - {fileID: 1000012151933606, guid: 2dc7c11b0b56c994197c02be5c297f29, type: 3}
-  - {fileID: 1000010806502382, guid: 6b9fef59fa39f0744ab9d260ec6266d0, type: 3}
-  - {fileID: 198022, guid: ebac7e523f23787489f5735cea3f4680, type: 3}
+  - {fileID: 1000012064314126, guid: 0df5765acbf5842f38119a21a68f5eec, type: 3}
+  - {fileID: 151474, guid: 1cce19a4b69c05544a49da41ad29ce02, type: 3}
 --- !u!4 &787823074
 Transform:
   m_ObjectHideFlags: 0
@@ -528,7 +525,7 @@ MonoBehaviour:
   maxSpeed: 3
   jumpForce: 6
   jumpInputCount: 10
-  mouseSensitivity: 1.5
+  mouseSensitivity: 1
   mouseSmoothing: 8
   minAngleY: -90
   maxAngleY: 90
