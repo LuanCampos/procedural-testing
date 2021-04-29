@@ -655,7 +655,7 @@ MonoBehaviour:
   maxSpeed: 3
   jumpForce: 6
   jumpInputCount: 10
-  mouseSensitivity: 2
+  mouseSensitivity: 1.5
   mouseSmoothing: 8
   minAngleY: -90
   maxAngleY: 90
