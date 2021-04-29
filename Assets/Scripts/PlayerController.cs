@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         {
 			RaycastHit hit;
 			
-			if (Physics.SphereCast(transform.position, 0.4f, -Vector3.up, out hit, 0.15f))
+			if (Physics.SphereCast(transform.position, 0.45f, -Vector3.up, out hit, 0.11f))
 			{
 				rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 				willJump = 0;
